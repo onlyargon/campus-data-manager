@@ -1,24 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import useSWR from "swr"
-import { useTheme } from "next-themes"
-import {
-  BookOpen,
-  ChevronRight,
-  Database,
-  GraduationCap,
-  HelpCircle,
-  Library,
-  Moon,
-  Sun,
-  Users,
-} from "lucide-react"
-import { Toaster } from "sonner"
+import { RecordsWorkspace } from "@/components/records-workspace"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { TooltipProvider } from "@/components/ui/tooltip"
 import {
   Dialog,
   DialogContent,
@@ -26,10 +9,10 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { Separator } from "@/components/ui/separator"
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -43,9 +26,23 @@ import {
   SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar"
-import { RecordsWorkspace } from "@/components/records-workspace"
+import { TooltipProvider } from "@/components/ui/tooltip"
 import { fetchRecords } from "@/lib/client-api"
-import { databases, databaseKeys, type DatabaseKey } from "@/lib/records"
+import { databaseKeys, databases, type DatabaseKey } from "@/lib/records"
+import {
+  BookOpen,
+  ChevronRight,
+  GraduationCap,
+  HelpCircle,
+  Library,
+  Moon,
+  Sun,
+  Users,
+} from "lucide-react"
+import { useTheme } from "next-themes"
+import { useState } from "react"
+import { Toaster } from "sonner"
+import useSWR from "swr"
 
 const icons = { students: Users, courses: BookOpen, library: Library }
 function DatabaseNavigation({
@@ -138,45 +135,22 @@ export function CampusWorkspace({
                 <p className="text-xs text-muted-foreground">Data Manager</p>
               </div>
             </div>
-            <div className="flex items-center gap-2 rounded-md border bg-background px-3 py-2.5">
-              <Database className="size-4 text-muted-foreground" />
-              <span className="text-xs font-medium">Campus workspace</span>
-              <Badge variant="secondary" className="ml-auto">
-                Demo
-              </Badge>
-            </div>
           </SidebarHeader>
           <SidebarContent className="px-2">
             <DatabaseNavigation selected={database} onSelect={select} />
+            <SidebarMenuItem>
+              <SidebarMenuButton onClick={() => setHelp(true)}>
+                <HelpCircle />
+                <span>Getting started</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
           </SidebarContent>
-          <SidebarFooter className="gap-4 p-4">
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton onClick={() => setHelp(true)}>
-                  <HelpCircle />
-                  <span>Getting started</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-            <Separator />
-            <div className="flex items-start gap-3 px-1 pb-1">
-              <GraduationCap className="mt-0.5 size-4 text-muted-foreground" />
-              <div className="flex flex-col gap-1">
-                <p className="text-xs font-medium">
-                  One campus. Three databases.
-                </p>
-                <p className="text-xs leading-relaxed text-muted-foreground">
-                  Student, course, and library records in one place.
-                </p>
-              </div>
-            </div>
-          </SidebarFooter>
         </Sidebar>
         <SidebarInset className="min-w-0">
           <header className="flex h-16 shrink-0 items-center justify-between gap-3 border-b px-5 sm:px-8 lg:px-10">
             <div className="flex items-center gap-3">
               <SidebarTrigger />
-              <Separator orientation="vertical" className="h-4" />
+              <Separator orientation="vertical" className="h-auto" />
               <nav
                 aria-label="Breadcrumb"
                 className="flex items-center gap-2 text-sm"
