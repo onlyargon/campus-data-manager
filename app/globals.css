@@ -127,3 +127,18 @@
     @apply font-sans;
     }
 }
+/* Keep the starter's neutral theme; give dense records a consistent rhythm. */
+.records-table [data-slot="table"] { min-width: 780px; }
+.records-table [data-slot="table-head"] { background: var(--muted); padding-inline: 1.25rem; }
+.records-table [data-slot="table-cell"] { height: 64px; padding-inline: 1.25rem; }
+.records-table [data-slot="table-row"]:last-child { border-bottom: 0; }
+.theme-sun { display: none; }
+.theme-moon { display: block; }
+.dark .theme-sun { display: block; }
+.dark .theme-moon { display: none; }
+html { scrollbar-color: var(--border) var(--background); }
+::selection { background: var(--primary); color: var(--primary-foreground); }
+input { caret-color: var(--foreground); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
