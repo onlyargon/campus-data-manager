@@ -37,3 +37,10 @@ pnpm-debug.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local databases and browser test artifacts
+/data/
+/test-results/
+/playwright-report/
+/output/playwright/
+/.playwright-cli/
